@@ -8,26 +8,38 @@ The primary goal of this file is to demonstrate a simple python program to class
 @author: rk
 """
 
-def classifyTriangle(a,b,c):
+def classify_triangle(side_a,side_b,side_c):
+    """
+        Classifies a triangle based on the lengths of its sides.
+        
+        Parameters:
+        a (int): Length of the first side.
+        b (int): Length of the second side.
+        c (int): Length of the third side.
+
+        Returns:
+        str: Type of the triangle ('Equilateral', 'Isoceles', 'Scalene', 'Right', 'NotATriangle', 
+        or 'InvalidInput').
+        """
+        # pylint: disable=too-many-return-statements
 
     # require that the input values be >= 0 and <= 200
-    if a > 200 or b > 200 or c > 200:
+    if side_a > 200 or side_b > 200 or side_c > 200:
         return 'InvalidInput'
-        
-    if a <= 0 or b <= 0 or c <= 0:
+    if side_a <= 0 or side_b <= 0 or side_c <= 0:
         return 'InvalidInput'
-    
-    if not(isinstance(a,int) and isinstance(b,int) and isinstance(c,int)):
+    if not(isinstance(side_a,int) and isinstance(side_b,int) and isinstance(side_c,int)):
         return 'InvalidInput'
 
-    if (a + b <= c) or (a + c <= b) or (b + c <= a):
+    if (side_a + side_b <= side_c) or (side_a + side_c <= side_b) or (side_b + side_c <= side_a):
         return 'NotATriangle'
 
-    if a == b and b == c:
+    if side_a == side_b and side_b == side_c:
         return 'Equilateral'
-    elif (a**2 + b**2 == c**2) or (a**2 + c**2 == b**2) or (b**2 + c**2 == a**2):
+    if (side_a**2 + side_b**2 == side_c**2) or \
+        (side_a**2 + side_c**2 == side_b**2) or \
+        (side_b**2 + side_c**2 == side_a**2):
         return 'Right'
-    elif (a == b) or (a == c) or (b == c):
+    if (side_a == side_b) or (side_a == side_c) or (side_b == side_c):
         return 'Isoceles'
-    else:
-        return 'Scalene'
+    return 'Scalene'
